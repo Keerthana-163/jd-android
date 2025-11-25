@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Interview — Analysis</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+  <style>
+    body { background:#071028; color:#fff; font-family:"Segoe UI",sans-serif; padding:28px; }
+    .step { max-width:1100px; margin:auto; padding:22px; background:#08122a; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.5); }
+    h2 { margin-bottom:10px; color:#dff0ff; }
+    select, button { padding:10px 14px; border-radius:8px; border:none; margin-right:8px; font-size:15px; }
+    button { background:#3a63ff; color:white; cursor:pointer; }
+    button:disabled { opacity:0.45; cursor:not-allowed; }
+    #aiStream { width:100%; height:200px; background:#071428; border-radius:10px; padding:10px; overflow-y:auto; margin-bottom:12px; border:1px solid #123; color:#d6eaff; }
+    video { border-radius:8px; border:1px solid #cfe3ff; background:#000; }
+    .top-row { display:flex; gap:16px; align-items:flex-start; margin-bottom:12px; }
+    .left { flex:1 }
+    .right { width:340px }
+    .analysis-box { border-radius:10px; padding:12px; background:#fff; color:#071028; border:1px solid #cfe3ff; }
+    .question-nav { margin-top:12px; }
+    .summary-row { display:flex; gap:12px; margin-top:12px; }
+    .summary-box { background:#06142a; padding:10px; border-radius:8px; border:1px solid #123; color:#d6eaff; flex:1; }
+    .media-row { display:flex; gap:12px; margin-top:12px; }
+    .media-box { flex:1; }
+    .suggest-box { width:320px; }
+  </style>
+</head>
+<body>
+
+  <!-- STEP 1 -->
+  <div id="step1" class="step">
+    <h2>Step 1 — Select Topic</h2>
+    <select id="topic">
+      <option>Product Designer</option>
+      <option>PCB Designer</option>
+      <option>Firmware / Software Developer (Embedded)</option>
+      <option>Integration Engineer</option>
+      <option>Domain Expert & V&V Engineer</option>
+      <option>Mechanical Designer</option>
+      <option>Procurement Specialist</option>
+    </select>
+    <button id="step1NextBtn">Next</button>
+  </div>
+
+  <!-- STEP 2 -->
+  <div id="step2" class="step" style="display:none;">
+    <h2>Step 2 — Intro Video</h2>
+    <video id="introVideo" width="880" controls playsinline>
+      <source id="introSrc" src="/static/videos/product_designer_intro.mp4" type="video/mp4" />
+    </video>
+    <div style="margin-top:12px">
+      <button id="step2BackBtn">Back</button>
+      <button id="startBtn" disabled>Start Interview</button>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div id="step3" class="step" style="display:none;">
+    <h2>Step 3 — AI Interview (Demo)</h2>
+    <div id="aiStream"></div>
+    <audio id="aiAudio" autoplay></audio>
+
+    <div style="margin-top:12px">
+      <button id="step3BackBtn">Back</button>
+      <button id="endBtn" disabled>End Interview</button>
+      <button id="analyzeBtn" class="btn primary">Analyze My Interview</button>
+
+      <span id="analyzeStatus" style="margin-left:12px;color:#bcd;"></span>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div id="finalReport" class="step" style="display:none;">
+    <h2>Analysis Report of Your Interview</h2>
+
+    <div class="top-row">
+      <div class="left">
+        <!-- Big analysis box (updates when selecting question number) -->
+        <div id="analysisBox" class="analysis-box" style="min-height:220px">Select a question number below to view details.</div>
+
+        <!-- question number selector -->
+        <div id="questionNav" class="question-nav" style="margin-top:10px"></div>
+
+        <!-- overall score directly below numbers -->
+        <div id="overallScore" style="margin-top:12px;font-weight:700;color:#fff"></div>
+
+        <!-- summary boxes -->
+        <div class="summary-row">
+           
+          <div id="strengths" class="summary-box">Strengths: —</div>
+          <div id="improvements" class="summary-box">Improvements: —</div>
+          <div id="nextSteps" class="summary-box">Next Steps: —</div>
+        </div>
+
+        <!-- media + suggested course after summaries -->
+        <div class="media-row">
+          <div class="media-box">
+            <div style="color:#d6eaff;margin-bottom:6px">You can check your recorded video here</div>
+            <video id="studentPlayback" controls width="100%" style="border-radius:8px;border:1px solid #cfe3ff"></video>
+          </div>
+          <div class="suggest-box">
+            <div style="color:#d6eaff;margin-bottom:6px">Suggested course</div>
+            <div id="suggestedCourse"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="right">
+        <!-- small right column: keep overall analysis summary -->
+        <div style="background:#06142a;padding:12px;border-radius:8px;border:1px solid #123;color:#d6eaff">
+          <div style="font-weight:700;margin-bottom:8px">Summary</div>
+          <div id="analysisSummary" style="margin-bottom:8px;min-height:80px;color:#bcd"></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:10px">
+      <button id="backToInterviewBtn" onclick="location.reload()">Back to Interview</button>
+      
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
