@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+
+# Virtual env
+venv/
+.env/
+env/
+.venv/
+
+# Environment / Secrets
+.env
+.env.*
+!.env.example
+
+# Node & JS Items (if any)
+node_modules/
+dist/
+build/
+
+# Cache
+*.log
+*.cache
+*.sqlite
+*.sqlite3
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Media
+uploads/
+*.webm
+*.mp4

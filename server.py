@@ -1,6 +1,4 @@
-# ============================
-# FINAL CLEAN server.py (2025)
-# ============================
+
 
 import os
 import json
@@ -191,7 +189,7 @@ def topic_instructions(topic: str, context_text: str) -> str:
 You are a professional, Indian-English male technical interviewer for the role "{topic}".
 Your job is to conduct a structured, realistic, end-to-end interview based ONLY on the 
 competencies, subskills, responsibilities, red flags, and quiz clues provided in the Context JSON.
-
+-during the interview,
 STRICT RULES
 - Speak ONLY in English.
 - NEVER switch topics. If the student asks for another topic, say:
@@ -359,35 +357,51 @@ async def analyze(request: Dict):
     user_prompt = f"""
 You are given Q/A pairs from an interview for topic "{topic}".
 
-Produce JSON:
+IMPORTANT:
+- You DO NOT have access to the actual video or audio, only the text Q/A content.
+- Estimate soft skills purely from the textual answers (structure, relevance, completeness, tone).
+- Never mention that you "cannot see the video" or "cannot hear the audio". Just give your best estimate.
+
+Produce JSON with the following top-level keys:
+
 - items[] list:
     - question
     - answer
     - expected_answer (2–5 lines)
     - score (0–10)
-    - what_you_did_well (list)
-    - what_could_be_better (list)
-    - missing_terminologies (list)
+    - what_you_did_well (list of bullet strings)
+    - what_could_be_better (list of bullet strings)
+    - missing_terminologies (list of domain terms that were missing or weak)
 
-- overall_score (0–10)
-- strengths (list)
-- improvements (list)
-- next_steps (list)
-- analysis_summary (short paragraph)
-- recording_url (echo this back)
+- overall_score (0–10)  // technical performance
+- strengths (list of short bullet strings)
+- improvements (list of short bullet strings)
+- next_steps (list of short bullet strings)
+- analysis_summary (short paragraph, 3–6 sentences)
+- recording_url (echo this back exactly)
+
+- non_technical:
+    - english_fluency_score (0–10, higher is better)
+    - english_fluency_comment (1–3 sentences)
+    - confidence_score (0–10, higher is better)
+    - confidence_comment (1–3 sentences)
+    - attentiveness_score (0–10, higher means they stayed on-topic and responded to the actual questions)
+    - attentiveness_comment (1–3 sentences)
+    - other_observations (list of short bullet strings about communication/behaviour)
 
 Q/A pairs:
 {json.dumps(qa_pairs, indent=2)}
 
-Recording URL: {recording_url}
+Recording URL (for reference only, do not analyse video): {recording_url}
 """
+
 
     try:
         resp = client.chat.completions.create(
             model=ANALYSIS_MODEL,
             messages=[
                 {"role": "system", "content": system_msg},
-                {"role": "user", "content": user_prompt}
+                {"role": "user", "content": user_prompt},
             ],
             temperature=0.0,
             max_tokens=1600,
@@ -409,13 +423,15 @@ Recording URL: {recording_url}
         improvements = data.get("improvements", [])
         next_steps = data.get("next_steps", [])
         analysis_summary = (
-    data.get("analysis_summary")
-    or data.get("analysis")
-    or data.get("summary")
-    or data.get("final_summary")
-    or ""
-)
+            data.get("analysis_summary")
+            or data.get("analysis")
+            or data.get("summary")
+            or data.get("final_summary")
+            or ""
+        )
         recording_echo = data.get("recording_url", recording_url)
+        non_technical = data.get("non_technical", {})
+
 
         suggested = SUGGESTED_COURSES.get(topic, {
             "title": f"Gyannidhi — {topic} Course",
@@ -430,7 +446,8 @@ Recording URL: {recording_url}
             "next_steps": next_steps,
             "analysis": analysis_summary,
             "recording_url": recording_echo,
-            "suggested_course": suggested
+            "suggested_course": suggested,
+            "non_technical": non_technical,
         }
 
     except Exception as e:
@@ -445,5 +462,7 @@ Recording URL: {recording_url}
             "recording_url": "",
             "suggested_course": SUGGESTED_COURSES.get(
                 topic, {"title": "Gyannidhi Course", "url": "https://gyannidhi.in"}
-            )
+            ),
+            "non_technical": {},
+            
         }

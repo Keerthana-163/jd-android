@@ -25,10 +25,12 @@ const els = {
   nextStepsEl: document.getElementById("nextSteps"),
   videoPlayer: document.getElementById("studentPlayback"),
   suggestedCourse: document.getElementById("suggestedCourse"),
-  summaryBox: document.getElementById("summaryBox"),
+  summaryBox: document.getElementById("analysisSummary"),
 };
 
 let pc, dc, micStream, camStream, mixedStream;
+let audioContext = null;         // Web Audio for mixing
+let mixedAudioDestination = null;
 let interviewerTurns = [];
 let candidateTurns = [];
 let pendingAIText = "";
@@ -42,7 +44,10 @@ let currentIndex = 0;
 let currentQuestionText = "";
 let awaitingAnswer = false;
 let interviewRunning = false;
-
+let devicePreviewStream = null;
+let micAnalyser = null;
+let micDataArray = null;
+let micLevelAnimId = null;
 
 function showStep(s) {
   els.step1.style.display = "none";
@@ -54,7 +59,7 @@ function showStep(s) {
 document.addEventListener("visibilitychange", () => {
     if (document.hidden && interviewRunning) {
         alert("⚠️ Interview paused because you switched the tab. Please stay on this tab during the interview.");
-        endInterview("Tab switched");
+        
     }
 });
 function showFinalReport() {
@@ -203,9 +208,68 @@ function handleEvent(ev) {
     }
   }
 }
+async function initDeviceCheck() {
+  const deviceCheckEl = document.getElementById("deviceCheck");
+  const previewVideo = document.getElementById("devicePreviewVideo");
+  const micInner = document.getElementById("micLevelBarInner");
+  const statusEl = document.getElementById("deviceCheckStatus");
 
+  if (!deviceCheckEl) return;
+  deviceCheckEl.style.display = "block";
 
+  // Clean up old preview stream if any
+  if (devicePreviewStream) {
+    devicePreviewStream.getTracks().forEach(t => t.stop());
+    devicePreviewStream = null;
+  }
+  if (micLevelAnimId) {
+    cancelAnimationFrame(micLevelAnimId);
+    micLevelAnimId = null;
+  }
 
+  try {
+    devicePreviewStream = await navigator.mediaDevices.getUserMedia({
+      video: { width: 640, height: 480 },
+      audio: { echoCancellation: true }
+    });
+
+    if (previewVideo) {
+      previewVideo.srcObject = devicePreviewStream;
+    }
+
+    // Simple mic level meter using Web Audio
+    const AC = window.AudioContext || window.webkitAudioContext;
+    const ac = new AC();
+    const source = ac.createMediaStreamSource(devicePreviewStream);
+    micAnalyser = ac.createAnalyser();
+    micAnalyser.fftSize = 256;
+    micDataArray = new Uint8Array(micAnalyser.frequencyBinCount);
+    source.connect(micAnalyser);
+
+    const updateLevel = () => {
+      if (!micAnalyser || !micDataArray) return;
+      micAnalyser.getByteFrequencyData(micDataArray);
+      let sum = 0;
+      for (let i = 0; i < micDataArray.length; i++) sum += micDataArray[i];
+      const avg = sum / micDataArray.length; // 0–255
+      const pct = Math.min(100, Math.max(4, (avg / 255) * 100));
+      if (micInner) micInner.style.width = pct + "%";
+      micLevelAnimId = requestAnimationFrame(updateLevel);
+    };
+    updateLevel();
+
+    if (statusEl) {
+      statusEl.textContent = "Camera and microphone look good. You can now start the interview.";
+    }
+    els.startBtn.disabled = false;
+  } catch (err) {
+    console.error("Device preview failed:", err);
+    if (statusEl) {
+      statusEl.textContent =
+        "Unable to access camera/mic. Please allow permissions in the browser and refresh the page.";
+    }
+  }
+}
 
 async function startInterview() {
   if (started) return;
@@ -215,6 +279,14 @@ async function startInterview() {
 
   interviewerTurns = []; candidateTurns = []; pendingAIText = ""; lastAssistantText = ""; recordedBlobs = []; recordingUrl = ""; analysisItems = []; currentIndex = 0;
   interviewRunning = true;
+  if (devicePreviewStream) {
+    devicePreviewStream.getTracks().forEach(t => t.stop());
+    devicePreviewStream = null;
+  }
+  if (micLevelAnimId) {
+    cancelAnimationFrame(micLevelAnimId);
+    micLevelAnimId = null;
+  }
 
   const topic = els.topic.value;
   const tokResp = await fetch("/session", {
@@ -259,57 +331,103 @@ async function startInterview() {
     ch.onmessage = (ev) => handleEvent(ev);
   };
 
-  pc.ontrack = (e) => {
-    const audio = els.aiAudio;
-    audio.srcObject = e.streams[0];
-    audio.autoplay = true;
-    audio.muted = false;
-    
-    // Try immediately
-    audio.play().catch(err => {
-        console.warn("Autoplay blocked, enabling after user gesture:", err);
+  try {
+    micStream = await navigator.mediaDevices.getUserMedia({
+      audio: { echoCancellation: true },
+      video: false
     });
-
-    // 2nd retry after 300ms (Chrome workaround)
-    setTimeout(() => {
-        audio.play().catch(()=>{});
-    }, 300);
-};
-// Merge AI audio into mixedStream for recording
-
-
-
+  } catch (e) {
+    appendAI("Mic access required.");
+    started = false;
+    interviewRunning = false;
+    return;
+  }
 
   try {
-    micStream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true }, video: false });
-  } catch (e) { appendAI("Mic access required."); started=false; return; }
-
-  try {
-    camStream = await navigator.mediaDevices.getUserMedia({ audio:false, video:{ width:640, height:480, frameRate:15 } });
+    camStream = await navigator.mediaDevices.getUserMedia({
+      audio: false,
+      video: { width: 640, height: 480, frameRate: 15 }
+    });
     document.getElementById("webcamPreview").srcObject = camStream;
-  } catch (e) { console.warn("No webcam:", e); }
+  } catch (e) {
+    console.warn("No webcam:", e);
+  }
 
+  // Send mic to OpenAI
+  if (micStream) {
+    micStream.getTracks().forEach(t => pc.addTrack(t, micStream));
+  }
+  if (camStream) {
+    // Webcam video is only for local recording; not sent to OpenAI
+  }
+
+  // ===== Web Audio mixing: mic + AI voice into one track =====
+  audioContext = audioContext || new (window.AudioContext || window.webkitAudioContext)();
+  await audioContext.resume();
+
+  mixedAudioDestination = audioContext.createMediaStreamDestination();
+
+  // Mic → destination
+  if (micStream) {
+    const micSource = audioContext.createMediaStreamSource(micStream);
+    micSource.connect(mixedAudioDestination);
+  }
+
+  // Final recorded stream
   mixedStream = new MediaStream();
-  setTimeout(() => {
-    try {
-        const aiAudioPlayer = document.getElementById("aiAudio");
-        const aiStream = aiAudioPlayer.captureStream();
 
-        aiStream.getAudioTracks().forEach(track => {
-            mixedStream.addTrack(track);
-            console.log("Added AI audio track to mixedStream");
-        });
-    } catch (err) {
-        console.error("AI captureStream failed:", err);
+  // Add mixed audio track
+  mixedAudioDestination.stream.getAudioTracks().forEach(t => mixedStream.addTrack(t));
+
+  // Add webcam video track
+  if (camStream) {
+    camStream.getVideoTracks().forEach(t => mixedStream.addTrack(t));
+  }
+
+  // ===== AI audio: when it arrives, mix into the same destination =====
+  pc.ontrack = (e) => {
+    const aiAudio = els.aiAudio;
+    const remoteStream = e.streams[0];
+
+    // Play AI interviewer voice to the user
+    aiAudio.srcObject = remoteStream;
+    aiAudio.autoplay = true;
+    aiAudio.muted = false;
+
+    const remoteAudioTrack = remoteStream.getAudioTracks()[0];
+    if (remoteAudioTrack && audioContext && mixedAudioDestination) {
+      const aiStream = new MediaStream([remoteAudioTrack]);
+      const aiSource = audioContext.createMediaStreamSource(aiStream);
+      aiSource.connect(mixedAudioDestination);
+      console.log("🎤 Connected AI audio into mixedAudioDestination");
     }
-}, 500);
-  if (micStream) { micStream.getTracks().forEach(t => { pc.addTrack(t, micStream); mixedStream.addTrack(t); }); }
-  if (camStream) { camStream.getTracks().forEach(t => { pc.addTrack(t, camStream); mixedStream.addTrack(t); }); }
 
+    // Try to ensure playback
+    aiAudio.play().catch(() => {});
+    setTimeout(() => aiAudio.play().catch(() => {}), 300);
+  };
+
+  // ===== Start MediaRecorder on mixedStream (already has mic + video; AI added via mixing) =====
   recordedBlobs = [];
-  try { mediaRecorder = new MediaRecorder(mixedStream, { mimeType:'video/webm;codecs=vp8,opus' }); }
-  catch(e) { try { mediaRecorder = new MediaRecorder(mixedStream); } catch(err) { mediaRecorder = null; } }
-  if (mediaRecorder) { mediaRecorder.ondataavailable = (ev) => { if (ev.data && ev.data.size>0) recordedBlobs.push(ev.data); }; mediaRecorder.start(1000); }
+  try {
+    mediaRecorder = new MediaRecorder(mixedStream, { mimeType: "video/webm;codecs=vp8,opus" });
+  } catch (e) {
+    try {
+      mediaRecorder = new MediaRecorder(mixedStream);
+    } catch (err) {
+      console.error("MediaRecorder not supported:", err);
+      mediaRecorder = null;
+    }
+  }
+
+  if (mediaRecorder) {
+    mediaRecorder.ondataavailable = (ev) => {
+      if (ev.data && ev.data.size > 0) recordedBlobs.push(ev.data);
+    };
+    mediaRecorder.start(1000);
+    console.log("📹 MediaRecorder started on mixedStream (mic + AI + webcam)");
+  }
+
 
   const offer = await pc.createOffer({ offerToReceiveAudio: true, offerToReceiveVideo: false });
   await pc.setLocalDescription(offer);
@@ -330,7 +448,7 @@ async function startInterview() {
 async function endInterview() {
   if (!started) return;
   started = false;
-
+  interviewRunning = false;
   if (mediaRecorder && mediaRecorder.state !== "inactive") {
     try { mediaRecorder.stop(); } catch(e){}
   }
@@ -347,11 +465,11 @@ async function endInterview() {
     els.analyzeStatus.textContent = "Uploading recording...";
     try {
       const r = await fetch("/upload_recording", { method: "POST", body: fd });
-      const j = await r.json(); recordingUrl = j.url; els.analyzeStatus.textContent = "Upload complete."; els.goToAnalysisBtn.disabled = false;
-    } catch (e) { console.error(e); els.analyzeStatus.textContent = "Upload failed (you can still analyze)."; els.goToAnalysisBtn.disabled = false; }
+      const j = await r.json(); recordingUrl = j.url; els.analyzeStatus.textContent = "Upload complete."; 
+    } catch (e) { console.error(e); els.analyzeStatus.textContent = "Upload failed (you can still analyze).";  }
   } else {
-    els.goToAnalysisBtn.disabled = false;
-    interviewRunning = false;
+    
+    els.analyzeStatus.textContent = "No recording captured.";
 
   }
 }
@@ -397,22 +515,68 @@ function renderQuestionNav() {
 }
 
 function renderSummaryAndMedia(data) {
-  els.overallScoreEl.textContent = `Overall Score: ${data.overall_score || 0}/10`;
-  els.strengthsEl.innerHTML = `<strong>Strengths:</strong> ${(data.strengths||[]).join(", ")||"—"}`;
-  els.improvementsEl.innerHTML = `<strong>Improvements:</strong> ${(data.improvements||[]).join(", ")||"—"}`;
+  els.overallScoreEl.textContent =
+    `Overall Score: ${data.overall_score || 0}/10`;
 
-  els.nextStepsEl.innerHTML = `<strong>Next steps:</strong> ${(data.next_steps||[]).join(", ")||"—"}`;
+  els.strengthsEl.innerHTML =
+    `<strong>Strengths:</strong> ${(data.strengths || []).join(", ") || "—"}`;
+
+  els.improvementsEl.innerHTML =
+    `<strong>Improvements:</strong> ${(data.improvements || []).join(", ") || "—"}`;
+
+  els.nextStepsEl.innerHTML =
+    `<strong>Next steps:</strong> ${(data.next_steps || []).join(", ") || "—"}`;
+    const nonTechBox = document.getElementById("nonTechSummary");
+  if (nonTechBox) {
+    const nt = data.non_technical || {};
+    const efScore = (nt.english_fluency_score !== undefined && nt.english_fluency_score !== null)
+      ? nt.english_fluency_score
+      : "—";
+    const confScore = (nt.confidence_score !== undefined && nt.confidence_score !== null)
+      ? nt.confidence_score
+      : "—";
+    const attScore = (nt.attentiveness_score !== undefined && nt.attentiveness_score !== null)
+      ? nt.attentiveness_score
+      : "—";
+
+    const efComment = nt.english_fluency_comment || "—";
+    const confComment = nt.confidence_comment || "—";
+    const attComment = nt.attentiveness_comment || "—";
+    const others = (nt.other_observations || []).join(" • ");
+
+    nonTechBox.innerHTML = `
+      <strong>Communication & Behaviour</strong><br/>
+      <strong>English fluency:</strong> ${efScore}/10 — ${efComment}<br/>
+      <strong>Confidence:</strong> ${confScore}/10 — ${confComment}<br/>
+      <strong>Attentiveness:</strong> ${attScore}/10 — ${attComment}
+      ${others ? `<br/><strong>Other observations:</strong> ${others}` : ""}
+    `;
+  }
+
+
   if (els.summaryBox) {
-    els.summaryBox.innerHTML = data.analysis_summary || data.analysis || "—";
-}
-  if (data.recording_url) els.videoPlayer.src = data.recording_url;
+    const summary =
+      data.analysis ||
+      data.analysis_summary ||
+      data.summary ||
+      data.final_summary ||
+      "";
+    els.summaryBox.textContent = summary || "—";
+  }
+
+  if (data.recording_url) {
+    els.videoPlayer.src = data.recording_url;
+  }
+
   if (data.suggested_course) {
-    els.suggestedCourse.innerHTML = `<div style="background:#fff;border:1px solid #cfe3ff;padding:12px;border-radius:8px;color:#071028">
-      <div style="font-weight:700">${data.suggested_course.title}</div>
-      <a href="${data.suggested_course.url}" target="_blank">${data.suggested_course.url}</a>
-    </div>`;
+    els.suggestedCourse.innerHTML = `
+      <div style="background:#fff;border:1px solid #cfe3ff;padding:12px;border-radius:8px;color:#071028">
+        <div style="font-weight:700">${data.suggested_course.title}</div>
+        <a href="${data.suggested_course.url}" target="_blank">${data.suggested_course.url}</a>
+      </div>`;
   }
 }
+
 
 async function runAnalysis() {
   els.analyzeBtn.disabled = true; els.analyzeStatus.textContent = "Analyzing…";
@@ -455,7 +619,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   els.step1NextBtn.addEventListener("click", () => showStep(els.step2));
   els.step2BackBtn.addEventListener("click", () => showStep(els.step1));
-  els.introVideo.addEventListener("ended", () => { if (!started) els.startBtn.disabled = false; });
+    els.introVideo.addEventListener("ended", () => {
+    // After watching intro completely, show instructions + device check
+    if (!started) {
+      initDeviceCheck();
+      els.startBtn.disabled = false;
+    }
+  });
+
   els.introVideo.addEventListener("seeking", () => { if (!els.introVideo.ended) els.introVideo.currentTime = 0; });
 
   els.startBtn.addEventListener("click", (e) => { e.preventDefault(); startInterview(); showStep(els.step3); });

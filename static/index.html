@@ -53,6 +53,35 @@
       <button id="step2BackBtn">Back</button>
       <button id="startBtn" disabled>Start Interview</button>
     </div>
+
+    <!-- Instructions + device check (shown after intro video ends) -->
+    <div id="deviceCheck" style="display:none;margin-top:16px;padding:12px;border-radius:10px;background:#06142a;border:1px solid #123;">
+      <h3 style="margin-top:0;color:#dff0ff;">Step 2.1 — Instructions & Device Check</h3>
+      <p style="color:#c3d7ff;font-size:14px;line-height:1.5;">
+        Please sit in a quiet place, keep your face clearly visible, and look at the camera while speaking.
+        Speak in clear English, answer in complete sentences, and do not switch tabs during the interview.
+      </p>
+      <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;">
+        <div>
+          <div style="margin-bottom:6px;color:#d6eaff;">Camera preview</div>
+          <video id="devicePreviewVideo" width="260" autoplay muted playsinline
+                 style="border-radius:8px;border:1px solid #cfe3ff;background:#000;"></video>
+        </div>
+        <div style="flex:1;min-width:220px;">
+          <div style="margin-bottom:6px;color:#d6eaff;">Microphone level</div>
+          <div id="micLevelBarOuter"
+               style="height:14px;border-radius:999px;background:#020615;border:1px solid #123;overflow:hidden;">
+            <div id="micLevelBarInner" style="height:100%;width:4%;background:#3a63ff;"></div>
+          </div>
+          <div id="deviceCheckStatus"
+               style="margin-top:8px;color:#9fc4ff;font-size:13px;">
+            After the video ends, your browser may ask for camera and microphone permission.
+            Please click “Allow”.
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END device check -->
   </div>
 
   <!-- STEP 3 -->
@@ -77,7 +106,9 @@
     <div class="top-row">
       <div class="left">
         <!-- Big analysis box (updates when selecting question number) -->
-        <div id="analysisBox" class="analysis-box" style="min-height:220px">Select a question number below to view details.</div>
+        <div id="analysisBox" class="analysis-box" style="min-height:220px">
+          Select a question number below to view details.
+        </div>
 
         <!-- question number selector -->
         <div id="questionNav" class="question-nav" style="margin-top:10px"></div>
@@ -87,17 +118,18 @@
 
         <!-- summary boxes -->
         <div class="summary-row">
-           
           <div id="strengths" class="summary-box">Strengths: —</div>
           <div id="improvements" class="summary-box">Improvements: —</div>
           <div id="nextSteps" class="summary-box">Next Steps: —</div>
+          <div id="nonTechSummary" class="summary-box">Communication & Behaviour: —</div>
         </div>
 
         <!-- media + suggested course after summaries -->
         <div class="media-row">
           <div class="media-box">
             <div style="color:#d6eaff;margin-bottom:6px">You can check your recorded video here</div>
-            <video id="studentPlayback" controls width="100%" style="border-radius:8px;border:1px solid #cfe3ff"></video>
+            <video id="studentPlayback" controls width="100%"
+                   style="border-radius:8px;border:1px solid #cfe3ff"></video>
           </div>
           <div class="suggest-box">
             <div style="color:#d6eaff;margin-bottom:6px">Suggested course</div>
@@ -118,7 +150,6 @@
 
     <div style="margin-top:10px">
       <button id="backToInterviewBtn" onclick="location.reload()">Back to Interview</button>
-      
     </div>
   </div>
 

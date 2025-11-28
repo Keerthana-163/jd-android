@@ -1,370 +1,407 @@
 {
-  "metadata": {
-    "topic": "PCB Design Engineer / PCB Layout Engineer",
-    "language": "en",
-    "strict_topic_lock": true,
-    "version": "v1.0",
-    "source": "GyanNidhi – PCB Design Engineer Job Role Page"
-  },
-
-  "opening_policy": {
-    "ai_initiates": true,
-    "first_turn": {
-      "style": "concise_greeting_then_first_question",
-      "requirements": [
-        "English only",
-        "Max 16 spoken words",
-        "State topic briefly, then ask directly"
-      ]
-    }
-  },
-
-  "interview_style": {
-    "tone": "supportive_industry_mentor",
-    "question_length_words": { "min": 10, "max": 18 },
-    "one_question_at_a_time": true,
-    "define_acronyms_spelled": ["EMI", "E M I", "E S D", "S I", "P I", "R F", "B O M", "E C O"],
-    "forbidden_phrases": ["Perfect!", "Excellent answer!", "Great!", "Awesome!", "Amazing!"],
-    "positive_feedback_rule": "Acknowledge briefly only if specifically correct; otherwise probe or correct using context."
-  },
-
-  "coverage_plan": {
-    "policy": "breadth_then_depth_without_repetition",
-    "min_competencies_to_cover": 8,
-    "max_turns": 12,
-    "coverage_priority": [
-      "schematic_interpretation_and_footprints",
-      "stackup_and_materials",
-      "placement_strategy_and_constraints",
-      "routing_and_signal_integrity",
-      "impedance_control_and_high_speed",
-      "power_integrity_and_decoupling",
-      "emi_emc_design_rules",
-      "dfm_dft_and_fabrication_outputs",
-      "eda_tools_and_versioning",
-      "vendor_collaboration_and_bom",
-      "quality_and_esd_compliance",
-      "bringup_and_validation"
+    "resistor color coding.xlsx": [
+        "What is the value (in words) and tolerance of a four-band resistor with bands: Brown  Black  Orange  Gold?",
+        "In the resistor color code, what multiplier does the color Gold represent?",
+        "For a standard four-band resistor, which band indicates tolerance?",
+        "Which E-series of preferred resistor values corresponds to nominal five percent tolerance?",
+        "Decode this five-band resistor and give value and tolerance in words: Brown  Green  Black  Brown  Brown.",
+        "According to the Yageo RC0603FR-0710KL datasheet, what is the temperature coefficient (T C R) listed for the part?",
+        "For a five volt supply and an LED with forward voltage of two volt targeting ten milliampere, which resistor and power rating is the best practical choice?",
+        "What is the value (in words) and tolerance of: Red  Violet  Yellow  Gold?",
+        "In a six-band resistor, which band indicates the temperature coefficient (T C R)?",
+        "Decode this four-band resistor and give value and tolerance in words: Green  Blue  Red  Silver.",
+        "Which E-series corresponds to standard one percent resistor values?",
+        "According to the Yageo RC0603FR-0710KL datasheet, what is the rated power dissipation for the 0603 part?"
     ],
-    "repeat_rule": "Do not repeat a subskill unless prior answer was weak or incorrect.",
-    "off_topic_rule": "If the answer is off-topic, steer back to the nearest competency present here."
-  },
-
-  "job_context": {
-    "industry_categories": [
-      "Electronics",
-      "Semiconductor",
-      "Embedded Systems",
-      "Defense",
-      "Automotive",
-      "Consumer Electronics",
-      "Medical Devices"
+    "Understanding circuits.xlsx": [
+        "A resistor with color code Brown-Black-Red has what resistance value?",
+        "Which passive component stores energy in its magnetic field?",
+        "Which component is most commonly used for decoupling high-frequency noise in circuits?",
+        "Which regulator is best for providing 3.3V from a 3.6V supply?",
+        "What is the primary purpose of decoupling capacitors placed near IC pins?",
+        "Which regulator is used to step up voltage from a lower supply to a higher supply?",
+        "Which diode is used for voltage regulation in circuits?",
+        "Which device is most commonly used for high-speed switching in power circuits?",
+        "Which active device is commonly used for signal amplification?",
+        "What is the purpose of an Op-Amp configured as a buffer?",
+        "What is the function of a comparator in a circuit?",
+        "Which oscillator provides the most stable frequency for microcontrollers?",
+        "Which IC is commonly used to generate PWM signals in basic circuits?",
+        "Which PCB routing technique improves noise immunity in high-speed signals?",
+        "Which component ensures a default HIGH state for a digital input pin when no signal is applied?"
     ],
-    "designations": [
-      "PCB Design Engineer",
-      "PCB Layout Engineer",
-      "Hardware Layout Engineer",
-      "Signal Integrity Engineer",
-      "Board Design Specialist"
+    "Assembled PCB testing - Inspection and QC.xlsx": [
+        "During inspection, you see some SMD resistors shifted from their pads. Which inspection method detects this fastest across the whole PCB?",
+        "A BGA chip on your PCB needs solder joint verification. Which inspection method is most suitable?",
+        "During testing, you need to confirm if a capacitor is shorted internally. Which method is best?",
+        "If you want to confirm whether the assembled PCB actually performs its intended function, which test is needed?",
+        "A through-hole capacitor shows intermittent connection and dull cracked joints. What defect is this?",
+        "After soldering, some leads stick out too far from the PCB. What problem can this cause?",
+        "What happens if component leads do not match the hole pattern during insertion?",
+        "If a plated through-hole is not completely filled with solder, what defect results?",
+        "An 0805 resistor stands upright on one pad after reflow. What defect is this?",
+        "A solder joint connects two neighboring IC pins unintentionally. What defect is this?",
+        "An SMD capacitor sits at an angle across its pads. What defect is this?",
+        "What defect arises if insufficient solder paste is applied during stencil printing?",
+        "X-ray images show round empty spots inside solder joints. What are these called?",
+        "After reflow, small solder balls are found scattered near IC pins. What defect is this?",
+        "A joint appears dull and resists solder flow due to surface contamination. What defect is this?"
     ],
-    "career_path": [
-      "PCB Design Trainee",
-      "PCB Layout Engineer",
-      "Senior PCB Designer",
-      "Signal Integrity / Power Integrity Engineer",
-      "Hardware Design Manager"
+    "Transmission lines.xlsx": [
+        "When do PCB traces need to be treated as transmission lines?",
+        "Which of the following is NOT an example of a transmission line?",
+        "Which high-speed standard always requires transmission line design considerations?",
+        "What does the characteristic impedance (Z₀) of a transmission line depend on?",
+        "What does β (beta) represent in transmission line theory?",
+        "What happens when ZL equals Z0 in a transmission line?",
+        "Which termination technique places a resistor at the source of the signal?",
+        "Why is impedance matching necessary in PCB design?",
+        "Which termination uses a resistor divider at the load?",
+        "What is the typical differential impedance required for USB pairs on a PCB?",
+        "Which PCB structure is most commonly used for internal high-speed signal routing?",
+        "What tool is commonly used to visualize impedance matching and reflection coefficients?"
+    ],
+    "siganl amplifier.xlsx": [
+        "What frequency range do Intermediate Frequency (IF) amplifiers typically cover?",
+        "Which of the following is a primary role of IF amplifiers?",
+        "Which parameter is commonly specified in IF amplifier datasheets?",
+        "In PCB design for IF amplifiers, why is grounding and shielding important?",
+        "What is the role of bypass capacitors in IF amplifier PCB design?",
+        "Which of the following is an example of an IF amplifier IC?",
+        "In amplifier datasheets, what does 'Noise Figure' represent?",
+        "Why are controlled impedance traces used in IF amplifier PCB design?",
+        "Which feature of IF amplifiers enhances receiver performance?",
+        "Which skill is essential for PCB designers working with IF amplifiers?",
+        "Above what frequency range are RF amplifiers typically used?",
+        "Which parameter in datasheets indicates the distortion handling capability of an amplifier?",
+        "Which of the following functions do IF amplifiers enable in communication systems?",
+        "Why should parasitic capacitance and inductance be minimized in IF amplifier PCB design?",
+        "Which type of components are commonly selected for IF amplifiers?"
+    ],
+    "Understanding reference designs, EVM's schematic and Gerbers from component OEM websites.xlsx": [
+        "What is the primary purpose of an OEM reference design?",
+        "How do OEM reference designs help in faster product launches?",
+        "OEM reference designs usually cover:",
+        "Which skill is directly gained from studying reference designs?",
+        "Which of the following is a PCB layout skill learned from OEM reference designs?",
+        "What important design aspect is emphasized in many OEM reference designs?",
+        "Which advanced design domain can be studied through OEM reference designs?",
+        "Why must PCB designers study OEM reference designs?",
+        "How do reference designs help learners build confidence?",
+        "Why must PCB designers check datasheets when using reference designs?",
+        "Which company provides a large library of reference designs?",
+        "Which OEM is well-known for analog and mixed-signal reference designs?",
+        "Which company provides reference designs for microcontrollers and power devices?",
+        "Which OEM specializes in mobile and wireless communication reference designs?",
+        "Which OEM offers automotive and industrial reference designs?"
+    ],
+    "Soft skills required for PCB designer.xlsx": [
+        "What is the first step when analyzing a PCB blueprint?",
+        "What is the main risk of not clarifying ambiguous notes in schematics?",
+        "Which detail is crucial to check in a datasheet when selecting ICs for PCB?",
+        "Why should mechanical constraints be reviewed early in PCB design?",
+        "Why is it important to interpret PCB schematics accurately?",
+        "Which item is NOT typically included in a PCB Bill of Materials (BOM)?",
+        "Why should layout guidelines be included in documentation?",
+        "What should be included in PCB design notes?",
+        "Which of the following best describes a Bill of Materials (BOM)?",
+        "Which file format is typically prepared for PCB manufacturing?",
+        "Which communication method ensures record-keeping and clarity with manufacturers?",
+        "When collaborating with R and D teams, what should PCB designers prioritize?",
+        "What is one advantage of aligning with marketing and sales teams in PCB projects?",
+        "What happens if PCB designers fail to provide timely updates to stakeholders?",
+        "Which skill ensures fewer surprises and smoother PCB project execution?",
+        "Which document is essential to prove PCB compliance with standards?",
+        "Why is consistency in following PCB standards critical?",
+        "Which standard is most commonly followed in PCB design for quality?",
+        "What could be a risk if PCB standards are not followed?",
+        "Why are productivity tools like spreadsheets useful for PCB designers?"
+    ],
+    "Attitude & Skills - Team working.xlsx": [
+        "Which of the following is a basic requirement for power integrity in PCB design?",
+        "What is essential for maintaining signal integrity in PCB design?",
+        "Why is proper grounding important in PCB design?",
+        "Which design feature helps in heat dissipation from high-power components?",
+        "Why is connector and cable routing important in PCB design?",
+        "Which document outlines functional requirements for PCB design?",
+        "Which document provides a complete list of PCB components and suppliers?",
+        "What is the purpose of a DFM (Design for Manufacturability) guideline?",
+        "Which document ensures adherence to EMI/EMC regulations in PCB design?",
+        "Which document ensures PCB fits within product enclosures?",
+        "Which personal trait is most important for teamwork in PCB product design?",
+        "Which trait ensures client trust in service industry PCB projects?",
+        "What does being proactive mean for PCB designers?",
+        "Which attitude ensures error-free PCB design?",
+        "Why is adaptability important for PCB designers in service industry?",
+        "Which document usually starts a PCB service project?",
+        "Which document defines scope and deliverables in PCB service projects?",
+        "Why are client-specific design guidelines important?",
+        "What is the final deliverable in service PCB design projects?",
+        "Which document records design modifications for clients?"
+    ],
+    "High speed and signal integrity in PCB.xlsx": [
+        "What is the main role of a PCB designer?",
+        "Which file format is essential for PCB fabrication?",
+        "Overshoot in a digital signal means:",
+        "Undershoot in PCB signals is caused due to:",
+        "Crosstalk in PCBs occurs due to:",
+        "Which via type connects outer layers to inner layers without passing through the whole board?",
+        "What is the benefit of grouping related components close together?",
+        "Which practice reduces EMI in PCB design?",
+        "Controlled impedance in PCB design depends on:",
+        "Which PCB material has higher losses at high frequencies compared to advanced laminates?",
+        "What is the primary cause of signal reflections in high-speed PCBs?",
+        "Which tool is most widely used in professional environments for high-speed PCB design?",
+        "Which of the following best represents a schematic symbol?",
+        "Which parameter is most important when selecting a resistor footprint?",
+        "Which termination method reduces reflections in high-speed signals?",
+        "Which waveform distortion is MOST likely due to long traces without impedance control?",
+        "Decoupling capacitors are placed close to ICs to:",
+        "Which of the following is NOT a Design for Manufacturability (DFM) check?",
+        "Differential pairs must be routed:",
+        "At higher frequencies, why are advanced laminates preferred over FR4?"
+    ],
+    "Components packing and PCB assembling.xlsx": [
+        "What is the recommended storage temperature range for bare PCBs?",
+        "Why should gloves be used while handling bare PCBs?",
+        "Which additional item is packed with bare PCBs in vacuum-sealed bags?",
+        "What does a humidity indicator card in PCB storage show?",
+        "Which type of bag is used for antistatic protection during component packing?",
+        "Which information is mandatory on component labels?",
+        "Moisture-sensitive components must always be packed along with:",
+        "Which standard defines the baking procedure for ICs exposed to moisture?",
+        "An IC with MSL 3 must be used within how many hours of exposure?",
+        "What happens if moisture-sensitive ICs are soldered without proper baking after exposure?",
+        "Which of the following is an ESD safety measure while handling ICs?",
+        "Why are some parts marked as DNP in a BOM?",
+        "Which document clearly communicates the list of components not to be assembled?",
+        "Which RefDes label example is correct for resistors?"
+    ],
+    "PCB testing , inspection and QA.xlsx": [
+        "What does a Bare Board (BB) Report primarily check?",
+        "Which parameter is included in a BB Report?",
+        "What is the main advantage of X-ray PCB testing?",
+        "Which field is commonly found in an X-ray inspection report?",
+        "What is the cause of open or short circuits in PCBs?",
+        "What does misregistration in PCB manufacturing mean?",
+        "Which of the following is a drill defect in PCBs?",
+        "Copper defects in PCBs may be caused by?",
+        "Which tool is commonly used for PCB visual inspection?",
+        "Which skill is essential for a PCB quality inspector?",
+        "Which of the following is a soft skill required for PCB inspectors?",
+        "Which inspection method uses automated imaging to find PCB defects?"
+    ],
+    "PCB manufacturing files.xlsx": [
+        "Which file format is primarily used to define the artwork of PCB layers such as copper, solder mask, and silkscreen?",
+        "Which of the following tools can generate Gerber files for PCB manufacturing?",
+        "Which PCB file format specifies via and hole information for fabrication?",
+        "What is the risk of having misaligned drill files in PCB manufacturing?",
+        "Which file type is used to verify electrical connectivity between schematic and PCB layout?",
+        "Which type of tool is used for checking mismatches between schematic and PCB layout netlists?",
+        "What data do pick-and-place (centroid) files provide?",
+        "Why are pick-and-place files critical in PCB assembly?",
+        "Which PCB file lists all the components with part numbers and vendor details?",
+        "What is the primary role of a Bill of Materials (BOM) in PCB manufacturing?",
+        "What information do fabrication drawings typically include for PCB manufacturers?",
+        "What is the consequence of inaccurate or missing fabrication drawings?"
+    ],
+    "PCB manufacturering - process, DFM clarifications.xlsx": [
+        "What is the typical minimum finished hole size for mechanical CNC drilling in PCBs?",
+        "Which imaging technology enables manufacturers to achieve finer track and space?",
+        "Which file format is most commonly used to describe PCB copper and mask layers?",
+        "What should be included with NC Drill files to avoid misinterpretation?",
+        "What issue occurs when drill holes are too close to pad edges?",
+        "What happens if your PCB trace spacing is smaller than the manufacturerâ€™s capability?",
+        "What is the risk with very thin solder mask slivers?",
+        "What PCB layout feature can cause acid traps during etching?",
+        "Why must silkscreen be clipped away from solder pads?",
+        "What problem arises from unfilled vias placed inside component pads?",
+        "Why should DRC checks be run often during PCB design?",
+        "What should a README file for PCB fabrication always include?"
+    ],
+    "circuit simulation using SPICE.xlsx": [
+        "In SPICE, what is the netlist primarily used for?",
+        "Why is the ground node essential in a SPICE netlist?",
+        "What do the letters R, C, and L represent in SPICE netlists?",
+        "Why are device models important in SPICE simulation?",
+        "Which SPICE analysis is best suited to study capacitor charging over time?",
+        "Which type of SPICE analysis is used to plot the frequency response of a circuit?",
+        "Which SPICE analysis is commonly used to study component tolerances?",
+        "Which SPICE analysis finds steady-state voltages and currents?",
+        "What common issue occurs if a SPICE circuit node does not have a DC path to ground?",
+        "Why is careful selection of simulation time step important in SPICE transient analysis?",
+        "Why should manufacturer-provided models be used in SPICE simulations?",
+        "What happens if the total simulation time is too short?",
+        "What is the function of an RC low-pass filter?",
+        "How is the cutoff frequency of an RC low-pass filter calculated?",
+        "At the cutoff frequency of a low-pass RC filter, the output voltage is approximately:"
+    ],
+    "Trouble shooting digital signalling.xlsx": [
+        "Which of the following can cause digital signalling to fail?",
+        "What is the role of pull-up or pull-down resistors in digital circuits?",
+        "What happens when node capacitance increases in a digital circuit?",
+        "Why is a 10x oscilloscope probe recommended for troubleshooting digital signals?",
+        "Which is the first step in digital circuit troubleshooting using an oscilloscope?",
+        "Which of the following is an effect of EMI on digital signalling?",
+        "Which technique helps in mitigating EMI in digital signalling?",
+        "Which factor most directly causes reflections in PCB traces?",
+        "Ground bounce occurs mainly due to:",
+        "What is the trade-off when using strong pull-up resistors?",
+        "What is the effect of large RC delay in a digital node?",
+        "Where should you place the oscilloscope probe first when checking a digital signal?",
+        "If you observe ringing on a digital signal, which solution is most suitable?",
+        "Crosstalk in PCB traces mainly results from:",
+        "Why is shielding used in high-speed digital signals?"
+    ],
+    "Level translator.xlsx": [
+        "Which of the following best describes the difference between single-ended and differential signaling?",
+        "In digital signaling, how are logic levels typically represented?",
+        "What does the noise margin in digital logic represent?",
+        "Why is differential signaling more immune to noise compared to single-ended signaling?",
+        "Which feature of differential signaling supports faster data transmission?",
+        "Which voltage range corresponds to LV CMOS logic family?",
+        "What is the typical distance for board-to-board digital signaling?",
+        "Which of the following correctly defines unit-to-unit communication distance range?",
+        "Which factor has the greatest impact on the reliability of digital signaling on a PCB?",
+        "What defines the valid '0' and '1' thresholds in digital circuits?",
+        "Why is a larger noise margin preferred in digital circuits?",
+        "Which of the following represent valid logic high levels?",
+        "Where is differential signaling particularly useful?",
+        "Which challenge does differential signaling handle better than single-ended signaling?",
+        "Which standards are commonly used for unit-to-unit digital communication?"
+    ],
+    "Active elements in PCB.xlsx": [
+        "Which of the following is NOT an active element?",
+        "Which PCB parameter is most influenced by active elements?",
+        "What distinguishes active elements from passive elements?",
+        "Which of the following lists the correct BJT terminals?",
+        "What happens in the saturation region of a BJT?",
+        "How is the current gain (Beta) of a BJT defined?",
+        "Which model is typically used for small-signal analysis of BJTs?",
+        "Which are the correct MOSFET terminals?",
+        "MOSFETs are categorized into which two types?",
+        "Which MOSFET region is used for amplification?",
+        "What does Rds(on) in a MOSFET represent?",
+        "Why is selecting the right package type important in PCB design?",
+        "Which routing mistake can cause instability in MOSFET circuits?",
+        "What is the purpose of thermal vias in PCB design?",
+        "Why should EMI and stability be reviewed before finalizing PCB design?"
+    ],
+    "Miscellaneous Components in PCB Design.xlsx": [
+        "What is the overall frequency stability of the ASELJ CMOS crystal oscillator over −40 °C to +85 °C?",
+        "What is the supply voltage specification for the NT7050BB/BC TCXO?",
+        "Which type of fuse will allow short overloads (like motor startup) but still protect under prolonged overload?",
+        "IEC 60309 3‑pin + earth industrial connector commonly comes rated at which current?",
+        "What is the maximum acceptable frequency tolerance over manufacturing process for many crystals, according to Texas Instruments guidelines?",
+        "A fuse used in a mains AC 230 VAC circuit should have a rated voltage at least:",
+        "What is the frequency range of the ASELJ CMOS crystal oscillator family?",
+        "Which characteristic describes the maximum current a fuse can safely interrupt without damage?",
+        "What output type does the NT7050BB/BC oscillator provide?",
+        "Which IEC standard covers industrial plugs and sockets for higher currents and outdoor use?",
+        "What is the primary function of an RF attenuator in a circuit?",
+        "Which connector specification is most critical to ensure low power loss during current flow?",
+        "What is the role of a clock buffer IC in a digital circuit?",
+        "How are jumpers typically used in PCB prototypes?",
+        "Why should fuses be placed close to power entry connectors on a PCB?"
+    ],
+    "opamp.xlsx": [
+        "Which of the following is a common application of general-purpose op amps like LM358?",
+        "What is the typical supply voltage range for general-purpose op amps?",
+        "Which of the following parts is an example of a general-purpose op amp?",
+        "What is the key advantage of precision low-offset (auto-zero) op amps?",
+        "Which feature best distinguishes precision op amps from others?",
+        "Which of the following is a typical application of precision low-offset op amps?",
+        "In which application are low-noise op amps such as NE5532 typically used?",
+        "What is the typical noise level of low-noise op amps?",
+        "Which of these is an example of a low-noise op amp?",
+        "Which specification best describes high-speed op amps like LM6172?",
+        "Which application commonly requires high-speed op amps?",
+        "Which of the following is an example of a high-speed op amp?"
+    ],
+    "zener.xlsx": [
+        "Which Zener diode is commonly used for simple PCB voltage regulation?",
+        "Which Zener diode is suited for battery-powered circuits?",
+        "Which Zener diode is suitable for high power regulation applications?",
+        "Which Zener diode type is best for precise ADC/DAC calibration?",
+        "Which Zener diode is preferred in analog circuits needing low leakage?",
+        "Which Zener diode is used for symmetrical clamping applications?",
+        "Which Zener diode type is used for surge handling?",
+        "Which Zener diode protects against lightning surges?",
+        "Which Zener diode is used for multi-line PCB surge protection?",
+        "Which Zener diode type is commonly used in breadboard circuits?",
+        "Which Zener diode is best for compact automated assembly?",
+        "Which Zener diode is integrated inside ICs for direct ESD protection?"
+    ],
+    "diode.xlsx": [
+        "Which rectifier diode is best suited for AC to DC conversion in PCB design with ±10% tolerance?",
+        "Which diode module is suitable for AC mains rectification with tolerance around ±10%?",
+        "Which diode is suitable for switching power supply circuits with ±5% tolerance?",
+        "Which Schottky diode is most suitable for high-frequency rectification with ±5% tolerance?",
+        "Which of the following is a Schottky diode with ±5% tolerance?",
+        "Which package type is commonly used for Schottky diodes with ±5% tolerance?",
+        "Which diode is best suited for transient surge protection with ±10% tolerance?",
+        "Which diode is used for ESD protection in high-speed data circuits with ±5% tolerance?",
+        "Which diode is suitable for light sensing applications with ±5% tolerance?",
+        "Which diode is used in optical communication systems?",
+        "Which diode converts light into current in sensors? (Browse web to read datasheets of part numbers)",
+        "Which diode is used for RF tuning and oscillators?"
+    ],
+    "rlc.xlsx": [
+        "What is the cutoff frequency of a first-order RC low-pass filter?",
+        "The rise time of a first-order RC circuit is approximately:",
+        "Which component stores energy in the electric field in an RC circuit?",
+        "In an RL circuit, the time constant τ is:",
+        "The rise time of an RL circuit is approximately:",
+        "In RL circuits, which component stores energy in the magnetic field?",
+        "In a first-order low-pass filter, the slope beyond cutoff is:",
+        "The phase shift of a high-pass RC filter at very high frequency approaches:",
+        "A second-order RC filter provides a roll-off of:",
+        "A long PCB trace is most likely to introduce which parasitic effect?",
+        "Parasitic capacitance in a circuit can be estimated using which parameter from rise time measurements?",
+        "Parasitic inductance is commonly observed in:"
+    ],
+    "inductor.xlsx": [
+        "What is the typical tolerance range for power inductors used in DC-DC converters?",
+        "Which specification is most important when selecting power inductors for voltage regulators?",
+        "RF inductors generally require tight tolerances because:",
+        "Which parameter is most critical for RF inductors used in filters?",
+        "Filter inductors (chokes) are mainly used for:",
+        "What tolerance is usually acceptable for filter inductors?",
+        "Why do audio inductors require moderate tolerance levels?",
+        "Which application commonly uses audio inductors?",
+        "Toroidal inductors are typically used in:",
+        "Why are toroidal inductors preferred in high-current applications?",
+        "What is the typical current handling capability of toroidal inductors?"
+    ],
+    "capacitors.xlsx": [
+        "Which of the following is a common application of ceramic capacitors?",
+        "Which application best suits film capacitors?",
+        "What is the primary role of a coupling capacitor?",
+        "Which application best suits electrolytic capacitors?",
+        "Which specialized capacitor is mainly used for backup power storage?",
+        "Which specialized capacitor is commonly used in RF tuning circuits?",
+        "Which capacitor type is certified with X and Y safety ratings?",
+        "What is the typical voltage rating of high voltage capacitors?",
+        "What is the main function of a snubber capacitor?",
+        "Where are RF capacitors commonly used?",
+        "Which capacitor type is most suitable for oscillators and timer circuits?",
+        "What is the primary purpose of a decoupling capacitor?"
+    ],
+    "resistor.xlsx": [
+        "Which of the following resistor part numbers is suitable for general-purpose through-hole PCB use?",
+        "Which resistor part number is best suited for circuits requiring tighter tolerance and higher accuracy?",
+        "Which resistor part number is preferred for high-power circuits?",
+        "Which resistor part number provides stability in high-frequency applications?",
+        "Which resistor part number is ideal for low-noise, precision applications?",
+        "Which resistor part number acts both as a resistor and a fuse?",
+        "Which resistor part number allows manual adjustment of resistance in a circuit?",
+        "Which resistor part number is most suitable for handling high surge energy?",
+        "Which resistor part number is preferred in compact PCB designs like smartphones?",
+        "Which resistor part number is considered ultra-stable and used in instrumentation circuits?",
+        "Which resistor part number integrates multiple resistors into a single IC package?",
+        "Which resistor part number is best suited for high-current compact designs?",
+        "Which resistor part number is commonly used in calibration circuits for fine-tuning?",
+        "Which resistor part number generates lower noise and is used in signal processing?",
+        "In case of overload, which resistor part number can act as a protective device by breaking the circuit?"
     ]
-  },
-
-  "competencies": [
-
-    {
-      "id": "schematic_interpretation_and_footprints",
-      "name": "Schematic Interpretation & Footprint Creation",
-      "responsibilities": [
-        "Convert schematics into accurate footprints and symbols",
-        "Read datasheets and interpret pin functions",
-        "Ensure correct land patterns per IPC-7351"
-      ],
-      "subskills": [
-        "schematic_to_layout_mapping",
-        "datasheet_pin_analysis",
-        "ipc_footprint_standards"
-      ],
-      "red_flags": [
-        "Incorrect pad sizes or polarity markings",
-        "Footprints not matching manufacturer recommendations"
-      ]
-    },
-
-    {
-      "id": "stackup_and_materials",
-      "name": "Stackup Planning & PCB Materials",
-      "responsibilities": [
-        "Define layer stack based on signal types",
-        "Understand dielectric constants and loss tangents",
-        "Select materials that support impedance targets"
-      ],
-      "subskills": [
-        "layer_stackup_design",
-        "material_selection_for_speed",
-        "reference_plane_assignment"
-      ],
-      "red_flags": [
-        "No reference planes for high-speed routing",
-        "Chooses stackup without impedance goals"
-      ]
-    },
-
-    {
-      "id": "placement_strategy_and_constraints",
-      "name": "Component Placement & Layout Constraints",
-      "responsibilities": [
-        "Placement for manufacturability and thermal flow",
-        "Critical component proximity planning",
-        "Respect mechanical keepouts and enclosure constraints"
-      ],
-      "subskills": [
-        "critical_component_placement",
-        "thermal_and_current_path_planning",
-        "mechanical_clearance_and_keepouts"
-      ],
-      "red_flags": [
-        "Places sensitive analog near noisy digital signals",
-        "Violates mechanical restrictions"
-      ]
-    },
-
-    {
-      "id": "routing_and_signal_integrity",
-      "name": "Routing Strategy & Signal Integrity",
-      "responsibilities": [
-        "Route differential pairs, analog, digital and power appropriately",
-        "Manage crosstalk, reflections, and stub avoidance"
-      ],
-      "subskills": [
-        "differential_pair_routing",
-        "length_matching_and_skew_control",
-        "avoid_stubs_crosstalk_control"
-      ],
-      "red_flags": [
-        "Breaks return paths",
-        "Length mismatch on high-speed interfaces"
-      ]
-    },
-
-    {
-      "id": "impedance_control_and_high_speed",
-      "name": "Controlled Impedance & High-Speed Design",
-      "responsibilities": [
-        "Define trace widths/spacings for target impedance",
-        "Use termination strategies (series/AC/DC)",
-        "Interact with SI/PI simulation tools"
-      ],
-      "subskills": [
-        "impedance_calculation",
-        "termination_methods",
-        "high_speed_constraints_definition"
-      ],
-      "red_flags": [
-        "Confuses microstrip vs stripline impedance",
-        "No termination for fast edges"
-      ]
-    },
-
-    {
-      "id": "power_integrity_and_decoupling",
-      "name": "Power Integrity & Decoupling Strategy",
-      "responsibilities": [
-        "Place decoupling capacitors close to power pins",
-        "Design low-inductance power paths",
-        "Optimize capacitor networks for frequency response"
-      ],
-      "subskills": [
-        "decoupling_capacitor_strategy",
-        "pdn_low_inductance_design",
-        "grounding_reference_methods"
-      ],
-      "red_flags": [
-        "Decouplers placed far from IC pins",
-        "No multiple-capacitor frequency planning"
-      ]
-    },
-
-    {
-      "id": "emi_emc_design_rules",
-      "name": "EMI/EMC Awareness & Design Rules",
-      "responsibilities": [
-        "Design boards to minimize radiation and susceptibility",
-        "Ensure proper shielding, stitching vias, and return path integrity"
-      ],
-      "subskills": [
-        "emi_emc_best_practices",
-        "stitching_via_patterns",
-        "segregation_of_analog_and_digital"
-      ],
-      "red_flags": [
-        "Uncontrolled current loops",
-        "Mixes high-speed and sensitive analog zones"
-      ]
-    },
-
-    {
-      "id": "dfm_dft_and_fabrication_outputs",
-      "name": "DFM/DFT & Fabrication Output Generation",
-      "responsibilities": [
-        "Generate Gerbers, drill files, and assembly drawings",
-        "Ensure PCB manufacturability per IPC-2221",
-        "Provide test points and DFT-friendly routing"
-      ],
-      "subskills": [
-        "dfm_rules_application",
-        "gerber_and_fab_file_generation",
-        "test_point_planning"
-      ],
-      "red_flags": [
-        "Incorrect Gerber layers",
-        "Missing test access for important nodes"
-      ]
-    },
-
-    {
-      "id": "eda_tools_and_versioning",
-      "name": "EDA Tools, Libraries & Version Control",
-      "responsibilities": [
-        "Use Altium, KiCad, OrCAD or similar tools",
-        "Maintain libraries and follow version control processes"
-      ],
-      "subskills": [
-        "eda_tool_workflows",
-        "library_management_and_validation",
-        "version_control_with_ecad"
-      ],
-      "red_flags": [
-        "Uncontrolled library edits",
-        "No version history of design changes"
-      ]
-    },
-
-    {
-      "id": "vendor_collaboration_and_bom",
-      "name": "Vendor Collaboration, BOM & ECO Management",
-      "responsibilities": [
-        "Coordinate with fabrication and assembly vendors",
-        "Prepare BOM and manage revisions using ECOs"
-      ],
-      "subskills": [
-        "bom_preparation_and_costing",
-        "fabrication_vendor_communication",
-        "eco_change_management"
-      ],
-      "red_flags": [
-        "Uses wrong part numbers",
-        "Poor communication with PCB fabricators"
-      ]
-    },
-
-    {
-      "id": "quality_and_esd_compliance",
-      "name": "Quality, ESD Handling & Standards Compliance",
-      "responsibilities": [
-        "Adhere to ESD-safe handling procedures",
-        "Ensure RoHS/REACH and IPC compliance"
-      ],
-      "subskills": [
-        "esd_safety_practices",
-        "ipc_compliance_understanding",
-        "inspection_and_quality_checks"
-      ],
-      "red_flags": [
-        "Handles boards without ESD precautions",
-        "Ignores IPC guidelines"
-      ]
-    },
-
-    {
-      "id": "bringup_and_validation",
-      "name": "Board Bring-up & Validation Support",
-      "responsibilities": [
-        "Assist in lab bring-up and debugging",
-        "Use multimeter, oscilloscope and probes safely",
-        "Trace layout-to-schematic for debugging"
-      ],
-      "subskills": [
-        "bringup_debug_process",
-        "lab_instrument_knowledge",
-        "layout_to_schematic_tracing"
-      ],
-      "red_flags": [
-        "Cannot map PCB traces to schematics",
-        "Unsafe probing techniques"
-      ]
-    }
-  ],
-
-  "probe_templates": [
-    { "id": "define", "pattern": "Give a brief definition of {subskill} in PCB design context." },
-    { "id": "why", "pattern": "Why is {subskill} important for {competency}?" },
-    { "id": "when", "pattern": "When would you apply {subskill} and what constraint guides it?" },
-    { "id": "steps", "pattern": "List key steps for {subskill}, be concise." },
-    { "id": "checks", "pattern": "What checks confirm {subskill} was applied correctly?" },
-    { "id": "instrument", "pattern": "Which instrument verifies {subskill} and which waveform/reading proves success?" },
-    { "id": "failure", "pattern": "One failure symptom if {subskill} is wrong and how to fix it?" }
-  ],
-
-  "follow_up_rules": {
-    "weak_answer": [
-      "Ask for one concrete PCB example tied to the competency",
-      "Narrow to a single constraint (impedance, clearance, EMI, stackup)",
-      "Offer one hint from the JSON then re-ask briefly"
-    ],
-    "strong_answer": [
-      "Increase depth using a different template",
-      "Connect to adjacent competency such as SI → Stackup or DFM → Vendor collaboration"
-    ],
-    "off_topic_answer": [
-      "Gently state the interview is restricted to PCB layout; redirect to nearest PCB subskill"
-    ]
-  },
-
-  "evaluation_rubric": {
-    "scoring_scale": "0-10",
-    "weights": {
-      "schematic_interpretation_and_footprints": 0.10,
-      "stackup_and_materials": 0.10,
-      "placement_strategy_and_constraints": 0.10,
-      "routing_and_signal_integrity": 0.12,
-      "impedance_control_and_high_speed": 0.12,
-      "power_integrity_and_decoupling": 0.10,
-      "emi_emc_design_rules": 0.08,
-      "dfm_dft_and_fabrication_outputs": 0.10,
-      "eda_tools_and_versioning": 0.06,
-      "vendor_collaboration_and_bom": 0.05,
-      "quality_and_esd_compliance": 0.04,
-      "bringup_and_validation": 0.03
-    },
-    "levels": {
-      "0": "Incorrect or no knowledge",
-      "1": "Fragmented recall; cannot apply",
-      "2": "Mostly correct basics; limited application",
-      "3": "Correct and applicable; mentions constraints",
-      "4": "Confident, practical, cross-linked knowledge"
-    },
-    "red_flag_penalty": 1
-  },
-
-  "glossary": {
-    "EMI": "Electromagnetic Interference",
-    "ESD": "Electrostatic Discharge",
-    "SI": "Signal Integrity",
-    "PI": "Power Integrity",
-    "RF": "Radio Frequency",
-    "BOM": "Bill of Materials",
-    "ECO": "Engineering Change Order"
-  },
-
-  "language_policy": {
-    "allowed_language": "English",
-    "if_student_requests_other_language": "Politely decline and continue in English per course policy"
-  }
 }

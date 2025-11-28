@@ -1,0 +1,366 @@
+{
+  "metadata": {
+    "topic": "Electronic Product Integration Engineer / Technician",
+    "language": "en",
+    "strict_topic_lock": true,
+    "version": "v1.0",
+    "source": "GyanNidhi – Electronic Product Integration Job Role Page"
+  },
+
+  "opening_policy": {
+    "ai_initiates": true,
+    "first_turn": {
+      "style": "concise_greeting_then_first_question",
+      "requirements": [
+        "English only",
+        "Max 16 spoken words",
+        "State topic briefly, then ask directly"
+      ]
+    }
+  },
+
+  "interview_style": {
+    "tone": "supportive_industry_mentor",
+    "question_length_words": { "min": 10, "max": 18 },
+    "one_question_at_a_time": true,
+    "define_acronyms_spelled": [
+      "DMM",
+      "EMI",
+      "EMC",
+      "UART",
+      "SPI",
+      "I2C",
+      "RF",
+      "ESD",
+      "BOM",
+      "VSWR"
+    ],
+    "forbidden_phrases": [
+      "Perfect!",
+      "Excellent answer!",
+      "Great!",
+      "Awesome!",
+      "Amazing!"
+    ],
+    "positive_feedback_rule": "Acknowledge briefly only if specifically correct; otherwise probe or correct using context."
+  },
+
+  "coverage_plan": {
+    "policy": "breadth_then_depth_without_repetition",
+    "min_competencies_to_cover": 8,
+    "max_turns": 12,
+    "coverage_priority": [
+      "signals_and_power_basics",
+      "wiring_diagrams_and_cabling",
+      "physical_and_electrical_integration",
+      "signal_integrity_grounding_and_measurements",
+      "system_debug_and_fault_tracing",
+      "documentation_and_test_reports",
+      "safety_and_compliance_emi_esd",
+      "rf_and_antenna_integration",
+      "firmware_porting_mcu_fpga",
+      "calibration_and_reference_standards",
+      "cross_functional_collaboration"
+    ],
+    "repeat_rule": "Do not repeat a subskill unless prior answer was weak or incorrect.",
+    "off_topic_rule": "If the answer is off-topic, steer back to the nearest competency present here."
+  },
+
+  "job_context": {
+    "industry_categories": [
+      "Electronics",
+      "Embedded Systems",
+      "Defense",
+      "Consumer Electronics",
+      "IoT Devices",
+      "Biomedical",
+      "Automotive"
+    ],
+    "designations": [
+      "System Integration Engineer",
+      "Product Integration Specialist",
+      "Embedded Integration Engineer",
+      "Electro-Mechanical Integration Engineer",
+      "Hardware Integration Engineer"
+    ],
+    "career_path": [
+      "Junior Integration Engineer",
+      "System Integration Lead",
+      "Product Integration Manager",
+      "Systems Validation Architect",
+      "Engineering Program Manager"
+    ]
+  },
+
+  "competencies": [
+    {
+      "id": "signals_and_power_basics",
+      "name": "Electrical Signals & Power Basics",
+      "responsibilities": [
+        "Understand voltage, current, and power lines in integrated systems",
+        "Differentiate analog and digital signal paths",
+        "Recognize basic loading and distribution implications"
+      ],
+      "subskills": [
+        "analog_vs_digital_signal_flow",
+        "voltage_current_and_power_paths",
+        "basic_loading_and_droop_awareness"
+      ],
+      "red_flags": [
+        "Cannot distinguish power rails from signal lines",
+        "No sense of current rating or overload risk"
+      ]
+    },
+    {
+      "id": "wiring_diagrams_and_cabling",
+      "name": "Wiring Diagrams, Cable Schedules & Harness Routing",
+      "responsibilities": [
+        "Interpret wiring diagrams and cable schedules correctly",
+        "Identify connectors, pin numbers and mating parts",
+        "Route cables and harnesses with respect to current, noise and mechanical constraints"
+      ],
+      "subskills": [
+        "wiring_diagram_interpretation",
+        "connector_and_pinout_identification",
+        "cable_routing_current_rating_and_derating"
+      ],
+      "red_flags": [
+        "Misreads pin numbers or connector orientation",
+        "Routes power and sensitive signals together without separation"
+      ]
+    },
+    {
+      "id": "physical_and_electrical_integration",
+      "name": "Physical & Electrical Subsystem Integration",
+      "responsibilities": [
+        "Assemble PCBs, modules, cables and mechanical parts into systems",
+        "Ensure physical fitment with enclosures and mounting",
+        "Maintain correct electrical interfacing between subsystems"
+      ],
+      "subskills": [
+        "electro_mechanical_assembly_practices",
+        "interface_matching_and_connector_alignment",
+        "mechanical_fitment_and_clearance_checks"
+      ],
+      "red_flags": [
+        "Forces connectors or ignores keying features",
+        "Leaves mechanically strained cables or boards"
+      ]
+    },
+    {
+      "id": "signal_integrity_grounding_and_measurements",
+      "name": "Signal Integrity, Grounding & Basic Measurements",
+      "responsibilities": [
+        "Ensure proper grounding and return paths during integration",
+        "Use DMM, oscilloscope and signal generators for checks",
+        "Recognize basic signal integrity issues at system level"
+      ],
+      "subskills": [
+        "ground_loops_shielding_and_reference_paths",
+        "dmm_usage_for_basic_validation",
+        "oscilloscope_and_signal_generator_for_signal_checks"
+      ],
+      "red_flags": [
+        "Connects shields incorrectly creating ground loops",
+        "Probes signals without reference or wrong range settings"
+      ]
+    },
+    {
+      "id": "system_debug_and_fault_tracing",
+      "name": "System Debug & Fault Tracing",
+      "responsibilities": [
+        "Debug non-functional setups using structured approach",
+        "Localize faults to cables, modules or configuration",
+        "Capture and communicate clear observations to design teams"
+      ],
+      "subskills": [
+        "systematic_fault_isolation_steps",
+        "use_of_measurement_for_root_cause",
+        "logging_and_reporting_of_findings"
+      ],
+      "red_flags": [
+        "Randomly swaps connections without hypothesis",
+        "Does not record what was tested and observed"
+      ]
+    },
+    {
+      "id": "documentation_and_test_reports",
+      "name": "Documentation & Test Reporting",
+      "responsibilities": [
+        "Document integration steps and configurations used",
+        "Create structured test logs and reports",
+        "Update wiring and integration diagrams when changes occur"
+      ],
+      "subskills": [
+        "integration_step_logging",
+        "test_case_and_result_documentation",
+        "schematic_and_wiring_diagram_annotation"
+      ],
+      "red_flags": [
+        "No written record of test conditions",
+        "Changes wiring but leaves docs outdated"
+      ]
+    },
+    {
+      "id": "safety_and_compliance_emi_esd",
+      "name": "Safety, EMI/EMC & ESD Compliance Awareness",
+      "responsibilities": [
+        "Follow safe working practices for self and equipment",
+        "Handle boards and modules with ESD precautions",
+        "Maintain awareness of CE, FCC, RoHS level requirements"
+      ],
+      "subskills": [
+        "personal_and_lab_safety_habits",
+        "esd_bench_and_personal_protection",
+        "emi_emc_and_rohs_awareness_at_integration_level"
+      ],
+      "red_flags": [
+        "Touches sensitive boards without ESD strap or mat",
+        "Works near live high-voltage parts without precautions"
+      ]
+    },
+    {
+      "id": "rf_and_antenna_integration",
+      "name": "RF & Antenna Module Integration",
+      "responsibilities": [
+        "Connect and route RF modules and antenna feeds",
+        "Handle coax connectors and maintain proper bending radius",
+        "Respect antenna keepout zones and mounting orientation"
+      ],
+      "subskills": [
+        "rf_connector_and_coax_cable_handling",
+        "vswr_and_basic_rf_loss_awareness",
+        "antenna_mounting_clearance_and_orientation"
+      ],
+      "red_flags": [
+        "Bends coax sharply or crushes cables",
+        "Places metal objects close to antennas without concern"
+      ]
+    },
+    {
+      "id": "firmware_porting_mcu_fpga",
+      "name": "Firmware Porting Support for MCUs & FPGAs",
+      "responsibilities": [
+        "Set up UART/SPI/I2C links for firmware download and debug",
+        "Use bootloaders, JTAG and serial tools to flash images",
+        "Verify clocks, resets and basic interface bring-up"
+      ],
+      "subskills": [
+        "uart_spi_i2c_basic_interface_setup",
+        "bootloader_flashing_and_jtag_programming",
+        "clock_reset_and_powerup_sequence_checks"
+      ],
+      "red_flags": [
+        "Connects programming cables incorrectly",
+        "Flashes firmware without verifying power and reset conditions"
+      ]
+    },
+    {
+      "id": "calibration_and_reference_standards",
+      "name": "Calibration & Reference-Based Adjustments",
+      "responsibilities": [
+        "Adjust sensor or output parameters against reference standards",
+        "Record calibration values and conditions",
+        "Support periodic re-calibration activities"
+      ],
+      "subskills": [
+        "use_of_reference_instruments_or_standards",
+        "logging_calibration_offsets_and_dates",
+        "basic_understanding_of_drift_and_recalibration_need"
+      ],
+      "red_flags": [
+        "Changes calibration without logging values",
+        "Uses unverified reference for calibration"
+      ]
+    },
+    {
+      "id": "cross_functional_collaboration",
+      "name": "Cross-Functional Collaboration & Integration Readiness",
+      "responsibilities": [
+        "Collaborate with design, software and QA teams",
+        "Clarify interface assumptions before integration",
+        "Feed back integration learnings into design and test plans"
+      ],
+      "subskills": [
+        "team_communication_and_issue_escalation",
+        "interface_understanding_with_hw_sw_qa",
+        "feedback_loop_from_integration_to_design"
+      ],
+      "red_flags": [
+        "Works in isolation without informing others of changes",
+        "Does not escalate recurring integration issues"
+      ]
+    }
+  ],
+
+  "probe_templates": [
+    { "id": "define", "pattern": "Give a brief definition of {subskill} in integration context." },
+    { "id": "why", "pattern": "Why is {subskill} important for {competency} during product integration?" },
+    { "id": "when", "pattern": "When would you apply {subskill} and which constraint mainly guides it?" },
+    { "id": "steps", "pattern": "List key steps for {subskill}, keep the answer concise." },
+    { "id": "checks", "pattern": "What checks confirm {subskill} was applied correctly in the lab?" },
+    { "id": "instrument", "pattern": "Which instrument helps verify {subskill} and what reading proves success?" },
+    { "id": "failure", "pattern": "Name one failure symptom if {subskill} is wrong and how you would fix it." }
+  ],
+
+  "follow_up_rules": {
+    "weak_answer": [
+      "Ask for one concrete integration example tied to the competency",
+      "Narrow to a single constraint (safety, grounding, cabling, interface)",
+      "Offer one hint from the JSON then re-ask briefly"
+    ],
+    "strong_answer": [
+      "Increase depth using a different template (e.g., from steps to checks or failure)",
+      "Connect to adjacent competency such as wiring diagrams → safety, or RF → EMI/ESD"
+    ],
+    "off_topic_answer": [
+      "Gently state the interview is focused on integration skills, then redirect to a nearby listed subskill"
+    ]
+  },
+
+  "evaluation_rubric": {
+    "scoring_scale": "0-10",
+    "weights": {
+      "signals_and_power_basics": 0.10,
+      "wiring_diagrams_and_cabling": 0.12,
+      "physical_and_electrical_integration": 0.12,
+      "signal_integrity_grounding_and_measurements": 0.12,
+      "system_debug_and_fault_tracing": 0.10,
+      "documentation_and_test_reports": 0.08,
+      "safety_and_compliance_emi_esd": 0.10,
+      "rf_and_antenna_integration": 0.08,
+      "firmware_porting_mcu_fpga": 0.08,
+      "calibration_and_reference_standards": 0.05,
+      "cross_functional_collaboration": 0.05
+    },
+    "levels": {
+      "0": "Incorrect or no knowledge; contradictions with basic integration practices",
+      "1": "Fragmented recall; cannot apply; major gaps in safety or process",
+      "2": "Mostly correct basics; limited application; needs guidance on constraints",
+      "3": "Correct and applicable; mentions constraints, safety and basic checks",
+      "4": "Confident, practical, evidence-based; links integration, testing and collaboration"
+    },
+    "red_flag_penalty": 1
+  },
+
+  "glossary": {
+    "DMM": "Digital Multimeter",
+    "EMI": "Electromagnetic Interference",
+    "EMC": "Electromagnetic Compatibility",
+    "UART": "Universal Asynchronous Receiver-Transmitter",
+    "SPI": "Serial Peripheral Interface",
+    "I2C": "Inter-Integrated Circuit",
+    "RF": "Radio Frequency",
+    "ESD": "Electrostatic Discharge",
+    "BOM": "Bill of Materials",
+    "VSWR": "Voltage Standing Wave Ratio",
+    "CE": "Conformité Européenne (European conformity marking)",
+    "FCC": "Federal Communications Commission compliance (US)",
+    "RoHS": "Restriction of Hazardous Substances"
+  },
+
+  "language_policy": {
+    "allowed_language": "English",
+    "if_student_requests_other_language": "Politely decline and continue in English per course policy"
+  }
+}

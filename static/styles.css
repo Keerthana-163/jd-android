@@ -16,6 +16,7 @@ button[disabled] { opacity: .5; cursor: not-allowed; }
 table { width:100%; border-collapse: collapse; margin-top: 10px; }
 th, td { border:1px solid #2a3b63; padding:8px; font-size: 14px; }
 th { background:#0f1833; }
+
 #scoreSummary { margin-top: 8px; font-weight: 600; }
 footer { margin-top: 16px; color:var(--muted); }
 .progress-row { margin: 8px 0 14px; }
