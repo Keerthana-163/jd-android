@@ -1,8 +1,25 @@
 fastapi==0.115.0
 uvicorn==0.30.6
+
+# Required for handling form-data / UploadFile in FastAPI
+python-multipart==0.0.9    
+
+# Environment variables
 python-dotenv==1.0.1
+
+# For DigitalOcean Spaces or AWS S3 uploads
+boto3==1.34.34
+
+# Async file operations (FastAPI uses this internally if available)
+aiofiles==23.1.0
+
+# OpenAI SDK
 openai==1.52.0
+
+# Templates (if used)
 jinja2==3.1.4
+
+# HTTP clients (your existing dependencies)
 requests==2.32.3
 httpx==0.27.2
-httpcore==1.0.5
+h11==0.14.0
